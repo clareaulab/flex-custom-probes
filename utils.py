@@ -112,8 +112,8 @@ def probe_blast_search(blast_db: str,
 
     # 10X recommends at least 5 mismatches for a probe to be considered unique, so select alignments with < 5 mismatches to be "hits"
     # Also compute hits wrt gene name only
-    n_lhs_hits = len(set([aln.hit_def.split(" ")[0] for aln in lhs_hits.alignments if sum([hsp.identities for hsp in aln.hsps]) >= len(lhs_sequence) - 5]))
-    n_rhs_hits = len(set([aln.hit_def.split(" ")[0] for aln in rhs_hits.alignments if sum([hsp.identities for hsp in aln.hsps]) >= len(rhs_sequence) - 5]))
+    n_lhs_hits = len(set([aln.hit_def.split(" ")[1] for aln in lhs_hits.alignments if sum([hsp.identities for hsp in aln.hsps]) >= len(lhs_sequence) - 5]))
+    n_rhs_hits = len(set([aln.hit_def.split(" ")[1] for aln in rhs_hits.alignments if sum([hsp.identities for hsp in aln.hsps]) >= len(rhs_sequence) - 5]))
 
     return n_lhs_hits, n_rhs_hits
 
@@ -146,7 +146,7 @@ def transcriptome(genome: Genome) -> dict[str, str]:
     return transcriptome
 
 
-def export_probes_to_xlsx(probes: list[Probe], filename: str, probe_order_format: bool = True, n_barcodes: int = 1) -> pd.DataFrame:
+def export_probes_to_xlsx(probes: list[Probe], filename: str, probe_order_format: bool = False, n_barcodes: int = 1) -> pd.DataFrame:
     results = dict(
         name=[],
         lhs_probe=[],

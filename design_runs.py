@@ -33,12 +33,14 @@ def design_hhv6_probes(human_background=True):
         results += probes
 
     # Add Results to DataFrame
-    df = export_probes_to_xlsx(results, f"HHV6_probes_with_human_background.xlsx",
-                               probe_order_format=True, n_barcodes=4)
-    df.to_excel("HHV6_probes_with_human_background_info.xlsx", index=False)
-    df = export_probes_to_xlsx(results, f"HHV6_probes_with_human_background_1barcode.xlsx",
-                               probe_order_format=True, n_barcodes=1)
-    df.to_excel("HHV6_probes_with_human_background_1barcode_info.xlsx", index=False)
+    df = export_probes_to_xlsx(results, f"HHV6_probes_with_human_background_info.xlsx", n_barcodes=4)
+    # Add truseq barcodes
+    df['lhs_TruSeq_probe'] = "GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT" + df['lhs_seq']
+    df.to_excel(f"HHV6_probes_with_human_background_info.xlsx", index=False)
+    df = export_probes_to_xlsx(results, f"HHV6_probes_with_human_background_1barcode_info.xlsx", n_barcodes=1)
+    # Add truseq barcodes
+    df['lhs_TruSeq_probe'] = "GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT" + df['lhs_seq']
+    df.to_excel(f"HHV6_probes_with_human_background_1barcode_info.xlsx", index=False)
     print(f"Missing {len([r for r in results if r is None])} probes.")
 
     return pd.DataFrame(results)

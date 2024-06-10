@@ -153,8 +153,8 @@ class ProbeDesigner:
             score += self.INVALID_SCORE
         else:
             # Calculate a penalty for each off-target hit
-            score += (10 ** (n_hits_lhs - 1))
-            score += (10 ** (n_hits_rhs - 1))
+            score += (100 ** (n_hits_lhs - 1))
+            score += (100 ** (n_hits_rhs - 1))
 
         visited[(lhs_start, rhs_start)] = score
         return score
@@ -192,7 +192,7 @@ class ProbeDesigner:
             if result_args is None:
                 return []
             rhs_start, = np.round(result_args).astype(int)
-            visited.update({(rhs_start, rhs_start+self.LHS_PROBE_LENGTH): self.INVALID_SCORE*10 for p in probes})
+            visited.update({(int(rhs_start), int(rhs_start+self.LHS_PROBE_LENGTH)): self.INVALID_SCORE*10 for p in probes})
             lhs_start = rhs_start + self.LHS_PROBE_LENGTH
             lhs_probe = reverse_complement(sequence[lhs_start:lhs_start + self.LHS_PROBE_LENGTH])
             rhs_probe = reverse_complement(sequence[rhs_start:rhs_start + self.RHS_PROBE_LENGTH])
