@@ -184,7 +184,7 @@ class ProbeDesigner:
             result = dual_annealing(func=functools.partial(self.test_probe, strict_gc=True),
                                     bounds=[(0, max_start)],
                                     x0=np.array([len(sequence) // 2]),
-                                    args=(name, sequence, None, None, None, visited),
+                                    args=(name, sequence, visited),
                                     maxiter=1_000//n_probes,
                                     initial_temp=500
                                     )
