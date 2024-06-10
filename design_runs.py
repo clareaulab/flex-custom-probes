@@ -24,8 +24,7 @@ def design_hhv6_probes(human_background=True):
     results = []
     missing_probes = []
     for name, sequence in hhv6_transcriptome.items():
-        strand = '+' if 'location=complement(' not in name else '-'  # Check for complement
-        probes = probe_design.create_probes(name, sequence, strand=strand, n_probes=n_probes)
+        probes = probe_design.create_probes(name, sequence, n_probes=n_probes)
         if probes is None or len(probes) < 1:
             missing_probes.append(name)
             print(f"MISSING: {name}")
