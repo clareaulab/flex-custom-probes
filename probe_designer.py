@@ -174,10 +174,6 @@ class ProbeDesigner:
         probes = []
         visited = dict()
         for i in range(n_probes):
-            if len(probes) > 0:
-                # Do not allow overlapping probes
-                visited.update({(p.lhs, p.rhs): self.INVALID_SCORE*10 for p in probes})
-
             max_start = len(sequence) - self.LHS_PROBE_LENGTH - self.RHS_PROBE_LENGTH - 1
             if max_start <= 0:
                 return []
@@ -196,6 +192,7 @@ class ProbeDesigner:
             if result_args is None:
                 return []
             rhs_start, = np.round(result_args).astype(int)
+            visited.update({(rhs_start, rhs_start+self.LHS_PROBE_LENGTH): self.INVALID_SCORE*10 for p in probes})
             lhs_start = rhs_start + self.LHS_PROBE_LENGTH
             lhs_probe = reverse_complement(sequence[lhs_start:lhs_start + self.LHS_PROBE_LENGTH])
             rhs_probe = reverse_complement(sequence[rhs_start:rhs_start + self.RHS_PROBE_LENGTH])
