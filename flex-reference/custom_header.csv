@@ -1,0 +1,6 @@
+#probe_set_file_format=2.0
+#panel_name=Chromium HHV6 Transcriptome Probe Set v1.0.1
+#panel_type=custom
+#reference_genome=hhv6b_txg_reference
+#reference_version=202409
+gene_id,probe_seq,probe_id,included,region
