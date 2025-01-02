@@ -18,10 +18,9 @@ def design_car_probes(human_background=False):
         ensembl_genome.download(overwrite=False)
         ensembl_genome.index(overwrite=False)
         transcriptome_dict = transcriptome_dict | transcriptome(ensembl_genome)
-	print("here1")
 	
     probe_design = ProbeDesigner(working_dir="CAR", reference_database=transcriptome_dict)
-    n_probes = 3
+    n_probes = 5
     results = []
     missing_probes = []
     for name, sequence in design_me.items():
