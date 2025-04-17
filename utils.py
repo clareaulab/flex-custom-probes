@@ -159,6 +159,7 @@ def export_probes_to_xlsx(probes: list[Probe], filename: str, probe_order_format
         rhs_GC_content=[],
         GC_difference=[],
         score=[],
+        barcode=[]
     )
     # Note that the LHS
     rhs_prefix = "/5Phos/"
@@ -182,6 +183,7 @@ def export_probes_to_xlsx(probes: list[Probe], filename: str, probe_order_format
             results["rhs_GC_content"].append(probe.rhs_GC_content)
             results["GC_difference"].append(abs(probe.lhs_GC_content - probe.rhs_GC_content))
             results["score"].append(probe.score)
+            results["barcode"].append(barcode)
 
     df = pd.DataFrame(results)
     if not probe_order_format:
